@@ -1,0 +1,21 @@
+.board{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:30px;
+
+    margin:60px 0;
+
+}
+
+@media(max-width:1000px){
+
+.board{
+
+grid-template-columns:1fr;
+
+}
+
+}

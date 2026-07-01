@@ -1,0 +1,51 @@
+.column{
+
+    background:rgba(255,255,255,.75);
+
+    backdrop-filter:blur(12px);
+
+    border-radius:22px;
+
+    padding:25px;
+
+    min-height:550px;
+
+    box-shadow:
+
+    0 15px 35px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+}
+
+.column:hover{
+
+    transform:translateY(-6px);
+
+}
+
+.column h2{
+
+    text-align:center;
+
+    font-size:26px;
+
+    margin-bottom:25px;
+
+    color:#2563eb;
+
+    font-weight:700;
+
+}
+
+.empty{
+
+    margin-top:90px;
+
+    text-align:center;
+
+    color:#94a3b8;
+
+    font-size:17px;
+
+}
