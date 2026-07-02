@@ -16,10 +16,14 @@ export default function TaskCard({
 
     function deleteTask() {
 
+        const confirmDelete = window.confirm(
+            `Delete "${task.title}"?`
+        );
+
+        if (!confirmDelete) return;
+
         setTasks(prev =>
-
             prev.filter(item => item.id !== task.id)
-
         );
 
     }
@@ -126,23 +130,23 @@ export default function TaskCard({
 
                 editing ?
 
-                <input
+                    <input
 
-                    className="edit-input"
+                        className="edit-input"
 
-                    value={newTitle}
+                        value={newTitle}
 
-                    onChange={(e)=>setNewTitle(e.target.value)}
+                        onChange={(e) => setNewTitle(e.target.value)}
 
-                />
+                    />
 
-                :
+                    :
 
-                <h4>
+                    <h4>
 
-    📌 {task.title}
+                        📌 {task.title}
 
-</h4>
+                    </h4>
 
             }
 
@@ -156,31 +160,31 @@ export default function TaskCard({
 
                 editing ?
 
-                <button
+                    <button
 
-                    className="save-btn"
+                        className="save-btn"
 
-                    onClick={saveTask}
+                        onClick={saveTask}
 
-                >
+                    >
 
-                    Save
+                        Save
 
-                </button>
+                    </button>
 
-                :
+                    :
 
-                <button
+                    <button
 
-                    className="edit-btn"
+                        className="edit-btn"
 
-                    onClick={()=>setEditing(true)}
+                        onClick={() => setEditing(true)}
 
-                >
+                    >
 
-                    Edit
+                        Edit
 
-                </button>
+                    </button>
 
             }
 

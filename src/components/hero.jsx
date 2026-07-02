@@ -10,7 +10,7 @@ export default function Hero(){
 
                 <span className="hero-badge">
 
-                    🚀 Sprint 04 Project
+                    🚀 Modern Task Management
 
                 </span>
 
