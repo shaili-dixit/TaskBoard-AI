@@ -1,17 +1,13 @@
 import { useState } from "react";
-
 import "../styles/task.css";
 
 export default function TaskCard({
-
     task,
     status,
     setTasks
-
 }) {
 
     const [editing, setEditing] = useState(false);
-
     const [newTitle, setNewTitle] = useState(task.title);
 
     function deleteTask() {
@@ -25,79 +21,58 @@ export default function TaskCard({
         setTasks(prev =>
             prev.filter(item => item.id !== task.id)
         );
-
     }
 
     function moveForward() {
 
         setTasks(prev =>
-
             prev.map(item => {
 
                 if (item.id !== task.id) return item;
 
-                if (item.status === "todo")
-
+                if (item.status === "todo") {
                     return {
-
                         ...item,
-
                         status: "progress"
-
                     };
+                }
 
-                if (item.status === "progress")
-
+                if (item.status === "progress") {
                     return {
-
                         ...item,
-
                         status: "done"
-
                     };
+                }
 
                 return item;
-
             })
-
         );
-
     }
 
     function moveBackward() {
 
         setTasks(prev =>
-
             prev.map(item => {
 
                 if (item.id !== task.id) return item;
 
-                if (item.status === "done")
-
+                if (item.status === "done") {
                     return {
-
                         ...item,
-
                         status: "progress"
-
                     };
+                }
 
-                if (item.status === "progress")
-
+                if (item.status === "progress") {
                     return {
-
                         ...item,
-
                         status: "todo"
-
                     };
+                }
 
                 return item;
-
             })
-
         );
-
     }
 
     function saveTask() {
@@ -105,21 +80,17 @@ export default function TaskCard({
         if (newTitle.trim() === "") return;
 
         setTasks(prev =>
-
             prev.map(item =>
-
                 item.id === task.id
-
-                    ? { ...item, title: newTitle }
-
+                    ? {
+                        ...item,
+                        title: newTitle
+                    }
                     : item
-
             )
-
         );
 
         setEditing(false);
-
     }
 
     return (
@@ -127,126 +98,112 @@ export default function TaskCard({
         <div className="task-card">
 
             {
+                editing ? (
 
-                editing ?
+                    <div className="task-header">
 
-                    <input
+                        <input
+                            className="edit-input"
+                            value={newTitle}
+                            onChange={(e) => setNewTitle(e.target.value)}
+                            onKeyDown={(e) => {
+                                if (e.key === "Enter") {
+                                    saveTask();
+                                }
+                            }}
+                        />
 
-                        className="edit-input"
+                        <button
+                            className="save-btn"
+                            onClick={saveTask}
+                        >
+                            Save
+                        </button>
 
-                        value={newTitle}
+                    </div>
 
-                        onChange={(e) => setNewTitle(e.target.value)}
+                ) : (
 
-                    />
+                    <div className="task-header">
 
-                    :
+                        <h4>
+                            📌 {task.title}
+                        </h4>
 
-                    <h4>
+                        <div className="task-icons">
 
-                        📌 {task.title}
+                            <button
+                                className="icon-btn edit-icon"
+                                onClick={() => setEditing(true)}
+                                title="Edit"
+                            >
+                                ✏️
+                            </button>
 
-                    </h4>
+                            <button
+                                className="icon-btn delete-icon"
+                                onClick={deleteTask}
+                                title="Delete"
+                            >
+                                🗑️
+                            </button>
 
+                        </div>
+
+                    </div>
+
+                )
             }
 
-            <span className={`priority ${task.priority.toLowerCase()}`}>
+            <div className="task-info">
 
-                {task.priority}
-
-            </span>
-            <p className="task-date">
-
-                📅 {task.createdAt}
-
-            </p>
-
-            {
-
-                editing ?
-
-                    <button
-
-                        className="save-btn"
-
-                        onClick={saveTask}
-
-                    >
-
-                        Save
-
-                    </button>
-
-                    :
-
-                    <button
-
-                        className="edit-btn"
-
-                        onClick={() => setEditing(true)}
-
-                    >
-
-                        Edit
-
-                    </button>
-
-            }
-
-            <div className="task-buttons">
+                <span
+                    className={`priority ${task.priority.toLowerCase()}`}
+                >
+                    {task.priority}
+                </span>
 
                 {
-
-                    status !== "todo" &&
-
-                    <button
-
-                        className="move-btn"
-
-                        onClick={moveBackward}
-
-                    >
-
-                        ← Back
-
-                    </button>
-
-                }
-
-                {
-
-                    status !== "done" &&
-
-                    <button
-
-                        className="move-btn"
-
-                        onClick={moveForward}
-
-                    >
-
-                        Next →
-
-                    </button>
-
+                    task.createdAt && (
+                        <span className="task-date">
+                            📅 {task.createdAt}
+                        </span>
+                    )
                 }
 
             </div>
 
-            <button
+            <div className="task-buttons">
 
-                className="delete-btn"
+                {
+                    status !== "todo" && (
 
-                onClick={deleteTask}
+                        <button
+                            className="move-btn"
+                            onClick={moveBackward}
+                        >
+                            ← Back
+                        </button>
 
-            >
+                    )
+                }
 
-                Delete
+                {
+                    status !== "done" && (
 
-            </button>
+                        <button
+                            className="move-btn"
+                            onClick={moveForward}
+                        >
+                            Next →
+                        </button>
+
+                    )
+                }
+
+            </div>
 
         </div>
 
     );
-
 }
