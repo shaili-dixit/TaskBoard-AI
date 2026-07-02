@@ -155,6 +155,11 @@ export default function TaskCard({
                 {task.priority}
 
             </span>
+            <p className="task-date">
+
+                📅 {task.createdAt}
+
+            </p>
 
             {
 

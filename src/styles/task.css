@@ -155,3 +155,19 @@
     opacity:.92;
 
 }
+
+.task-date{
+
+    font-size:13px;
+
+    color:#777;
+
+    margin:8px 0 15px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:6px;
+
+}

@@ -15,16 +15,17 @@ export default function AddTask({ tasks, setTasks }) {
         if (text.trim() === "") return;
 
         const newTask = {
+    id: Date.now(),
+    title: text.trim(),
+    priority,
+    status: "todo",
 
-            id: Date.now(),
-
-            title: text,
-
-            priority,
-
-            status: "todo"
-
-        };
+    createdAt: new Date().toLocaleDateString("en-IN", {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+    }),
+};
 
         setTasks([...tasks, newTask]);
 
@@ -50,7 +51,7 @@ export default function AddTask({ tasks, setTasks }) {
 
                     value={text}
 
-                    onChange={(e)=>setText(e.target.value)}
+                    onChange={(e) => setText(e.target.value)}
 
                 />
 
